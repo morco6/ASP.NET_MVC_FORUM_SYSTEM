@@ -1,0 +1,110 @@
+﻿@model mvc_project1.Models.usersdb
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+
+    <link href="@Url.Content("~/Content/vendor/bootstrap/css/bootstrap.min.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/bootstrap.min.css")" rel="stylesheet" type="text/css" />
+    <!-- fonts -->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Assistant:600&amp;subset=hebrew" rel="stylesheet">
+
+    <title>התחברות</title>
+</head>
+
+<body id="page-top" dir="rtl">
+
+    <!-- Navigation -->
+
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+
+        <div class="container">
+
+            <a class="navbar-brand js-scroll-trigger" href='@Url.Action("showHome", "Home")' style="float:right"><img src="/Content/logo.png" class="logo" alt="logo"></a>
+            <div style="float:left">
+
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+
+                            ברוך הבא אורח, @Html.ActionLink("התחברות", "Loginuser", "Login") | @Html.ActionLink("הרשמה", "Enter", "user")
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+
+    <header class="masthead">
+        <div id="container" style="white-space:nowrap">
+            <div class="row">
+                <div id="image" style="display:inline; padding-right: 650px; padding-top: 35px;">
+                    <img src="/Content/global2.png" />
+                </div>
+                <div id="texts" style="display:inline; white-space:nowrap; padding-right: 50px; padding-top: 70px; color:#31302a;">
+                    @ViewBag.global_message
+                </div>
+            </div>
+        </div>
+    </header>
+    <br /><br /><br />
+    <div class="container">
+        <div class="row" style="padding-right:120px; height: 60px; background-color: #31302a;">
+            <div class="col" style="padding-top: 20px; color: #fff;">
+                התחברות
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row" style="padding-right:120px; background: -webkit-linear-gradient(#f5f5ff, white); border: 1px solid;">
+            <div class="col" style="padding-top: 50px; padding-bottom: 50px;">
+                <form action="Search" method="post">
+                    שם משתמש: <input id="Text1" name="NickName" type="text" />
+                    <br /><br />
+                    סיסמא: <input id="Text1" name="Password" type="password" aria-describedby="passwordHelpInline" pattern=".{8,20}" required title="8-20 תווים" />
+                    <small id="passwordHelpInline" class="text-muted">
+                        סיסמא חייבת להכיל 8-20 תווים
+                    </small>
+
+                    <br /><br />
+                    <input id="Submit1" type="submit" value="התחבר" />
+                    <br />
+                    @ViewBag.Message
+                    <div class="colortxt">
+                        @Html.ValidationSummary()
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <br /><br /><br /><br /><br />
+    <!-- Footer -->
+    <footer class="text-center">
+        <div class="footer-above">
+            <div class="container">
+                <div class="row">
+
+                    <div class="footer-col col-md-4">
+                        פרויקט במבוא לתקשורת מחשבים
+                        <br />
+                        מור כהן - 203420005
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </footer>
+</body>
+</html>

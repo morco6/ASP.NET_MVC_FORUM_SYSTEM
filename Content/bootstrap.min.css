@@ -1,0 +1,391 @@
+/*!
+ * Start Bootstrap - Freelancer v4.0.0-beta (http://startbootstrap.com/template-overviews/freelancer)
+ * Copyright 2013-2017 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-freelancer/blob/master/LICENSE)
+ */
+
+body {
+    font-family: 'Assistant', sans-serif;
+    overflow-x: hidden;
+}
+
+.hiddenRow {
+    padding: 0 !important;
+}
+
+.colortxt{
+    color: #31302a; 
+}
+
+    .colortxt ul{
+        color: #31302a;
+    }
+
+
+a,
+a.active,
+a:active,
+a:focus,
+
+
+a:hover {
+    color: #18bc9c;    
+     outline:0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Assistant', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    font-weight: 700;
+}
+
+
+h4 span{
+    margin-right: 850px;
+    font-size: medium;
+    text-decoration: underline;
+}
+
+
+
+.txt-centered {
+    margin: 0 auto;
+    margin:0px 50%;
+}
+
+
+.img-centered {
+    margin: 0 auto;
+}
+
+
+
+
+/*מרווח בין טבלאות*/
+section {
+    padding: 100px 0;
+}
+
+/*כותרות*/
+    section h2 {
+        font-size: 3em;
+        margin: 0;
+    }
+
+
+    ul {
+  list-style-type: none;
+  color: #fff;
+  padding: 0;
+  margin:0;
+}
+
+
+/*שורה עליונה*/
+#mainNav {
+    font-family: 'Assistant', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    font-weight: 700;
+    border: none;
+    background-color: #31302a;
+}
+
+    #mainNav a:focus {
+        outline: 0;
+    }
+
+    /*לוגו*/
+#mainNav .navbar-brand {
+    font-family: 'Assistant', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    font-size: 1.1rem;
+    color: #fff;
+}
+#mainNav .navbar-brand .logo {
+    width:474px;
+    height:87px;
+}
+
+#mainNav .navbar-brand.active,
+#mainNav .navbar-brand:active,
+#mainNav .navbar-brand:focus,
+#mainNav .navbar-brand:hover {
+    color: #fff;
+}
+
+#mainNav .navbar-nav {
+    letter-spacing: 1px;
+}
+/*כפתורים עליונים צבע*/
+    #mainNav .navbar-nav li.nav-item a.nav-link {
+        font-family: 'Assistant', sans-serif;
+        -webkit-font-smoothing: antialiased;
+        font-size: 1.5em;
+        color: #fff;
+        padding:15px;
+    }
+    /*כפתורים עליונים צבע במעבר*/
+        #mainNav .navbar-nav li.nav-item a.nav-link:hover {
+            color: #18bc9c;
+            outline: 0;
+        }
+
+        #mainNav .navbar-nav li.nav-item a.nav-link:active, #mainNav .navbar-nav li.nav-item a.nav-link:focus {
+            color: #fff;
+        }
+
+#mainNav .navbar-toggler {
+    font-size: 14px;
+    padding: 11px;
+    color: #fff;
+    border-color: #fff;
+}
+
+    #mainNav .navbar-toggler:focus, #mainNav .navbar-toggler:hover {
+        color: #fff;
+        border-color: #18bc9c;
+        background-color: #18bc9c;
+    }
+
+
+
+
+@media (min-width:992px) {
+    #mainNav {
+        padding-top: 25px;
+        padding-bottom: 25px;
+        -webkit-transition: padding-top .3s,padding-bottom .3s;
+        -moz-transition: padding-top .3s,padding-bottom .3s;
+        transition: padding-top .3s,padding-bottom .3s;
+    }
+
+        #mainNav .navbar-brand {
+            font-size: 2em;
+            -webkit-transition: all .3s;
+            -moz-transition: all .3s;
+            transition: all .3s;
+        }
+
+        #mainNav .navbar-nav > li.nav-item > a.nav-link.active {
+            color: #fff;
+            border-radius: 3px;
+            background: #18bc9c;
+            
+        }
+
+            #mainNav .navbar-nav > li.nav-item > a.nav-link.active:active, #mainNav .navbar-nav > li.nav-item > a.nav-link.active:focus, #mainNav .navbar-nav > li.nav-item > a.nav-link.active:hover {
+                color: #fff;
+                background: #18bc9c;
+            }
+
+        #mainNav.navbar-shrink {
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+        /*גודל של לוגו בירידה*/
+            #mainNav.navbar-shrink .navbar-brand {
+                font-size: 1.5em;
+            }
+
+}
+
+
+/*תמונת נושא*/
+header.masthead {
+
+    text-align: center;
+    color: #fff;
+    background-image:url('sky2.png');
+    background-repeat:no-repeat;
+    background-position:center;
+    border-color: #f5f5ff;
+
+}
+/*מרחק של טקסט מהתמונה שבבתוך התמונת נושא*/
+    header.masthead img {
+        display: block;
+        margin: 0 auto 10px;
+    }
+
+
+
+@media (min-width:768px) {
+    header.masthead {
+        
+        padding-top: 170px;
+        padding-bottom: 0px;
+    }
+
+
+
+}
+
+
+form .row:first-child .floating-label-form-group {
+    border-top: 1px solid #eee;
+}
+
+footer {
+    
+    
+    
+  right: 0;
+  bottom: 0;
+  left: 0;
+    
+    background-color: #31302a;
+    color: #fff;
+    align-content:center;
+}
+
+    footer h3 {
+        margin-bottom: 10px;
+        
+    }
+
+    footer .footer-above {
+        padding-top: 60px;
+        padding-right: 750px;
+        background-color: #31302a;
+    }
+
+    footer .footer-col {
+        margin-bottom: 60px;
+    }
+
+    footer .footer-below {
+        padding: 25px 0;
+        background-color: #31302a;
+    }
+
+
+
+
+.popover__title {
+}
+
+.popover__wrapper {
+    position: relative;
+    display: inline-block;
+}
+.popover__content {
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+    left: -250px;
+    transform: translate(0,10px);
+    background: -webkit-linear-gradient(#eaeaff, white);
+    padding: 1.5rem;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+    width: auto;
+}
+
+.popover__wrapper:hover .popover__content {
+    z-index: 10;
+    opacity: 1;
+    visibility: visible;
+    transform: translate(0,-20px);
+    transition: all 0.5s cubic-bezier(0.75, -0.02, 0.2, 0.97);
+}
+.popover__message {
+  text-align: center;
+}
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 200px; /* Location of the box */
+    padding-left: 500px; /* Location of the box */
+    padding-right: 500px;
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 50px;
+    border: 1px solid #888;
+    width: 80%;
+ 
+}
+
+/* The Close Button */
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+
+
+
+#wrapper
+{
+ margin:0 auto;
+ padding:0px;
+ text-align:center;
+ width:995px;
+}
+#wrapper h1
+{
+ margin-top:50px;
+ font-size:45px;
+ color:#585858;
+}
+#wrapper h1 p
+{
+ font-size:20px;
+}
+#table_detail
+{
+ width:500px;
+ text-align:left;
+ border-collapse: collapse;
+ color:#2E2E2E;
+ border:#A4A4A4;
+}
+
+#table_detail .hidden_row
+{
+ display:none;
+}
+
+.bubble {
+	position: relative;
+	background: #fcfdfe;
+	border-radius: .4em;
+}
+
+.bubble:after {
+	content: '';
+	position: absolute;
+	right: 0;
+	top: 25%;
+	width: 0;
+	height: 0;
+	border: 28px solid transparent;
+	border-left-color: #fcfdfe;
+	border-right: 0;
+	border-top: 0;
+	margin-top: -14px;
+	margin-right: -28px;
+
+}

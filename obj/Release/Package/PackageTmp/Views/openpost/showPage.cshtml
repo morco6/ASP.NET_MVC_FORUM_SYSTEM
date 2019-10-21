@@ -1,0 +1,145 @@
+﻿@model mvc_project1.Models.PersonModel
+
+    @{
+        string Nickname = Request.Cookies["Cookie1"]?.Value;
+        string val2 = Request.Cookies["Cookie2"]?.Value;
+        string val3 = Request.Cookies["Cookie3"]?.Value;
+
+        if (Nickname != null && val2 != null && Nickname.Equals(ViewBag.MyCookie1) && val2.Equals(ViewBag.MyCookie2)) { }
+        else
+        {
+            Response.Redirect("redirect");
+        }
+    }
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+
+    <link href="@Url.Content("~/Content/vendor/bootstrap/css/bootstrap.min.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/bootstrap.min.css")" rel="stylesheet" type="text/css" />
+    <!-- fonts -->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Assistant:600&amp;subset=hebrew" rel="stylesheet">
+
+    <title>פוסט חדש</title>
+</head>
+
+<body id="page-top" dir="rtl">
+
+    <!-- Navigation -->
+
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+
+        <div class="container">
+
+            <a class="navbar-brand js-scroll-trigger" href='@Url.Action("showHome", "Home")' style="float:right"><img src="/Content/logo.png" class="logo" alt="logo"></a>
+            <div style="float:left">
+
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                                        ברוך הבא, @ViewBag.MyCookie1 |
+                                    @{
+                                        if (Nickname != null && val2 != null && val3 != null && Nickname.Equals(ViewBag.MyCookie1) && val2.Equals(ViewBag.MyCookie2) && val3.Equals("1"))
+
+                                        {
+                                            <a style="color:#add82b;" href='@Url.Action("paneladmin", "AdminPanel")'>פאנל ניהול</a>
+                                            <text>|</text>
+                                        }
+                                    }
+                            
+                                    @Html.ActionLink("התנתק", "RemoveCookie", "Home")
+
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+
+    <header class="masthead">
+        <div id="container" style="white-space:nowrap">
+            <div class="row">
+                <div id="image" style="display:inline; padding-right: 650px; padding-top: 35px;">
+                    <img src="/Content/global2.png" />
+                </div>
+                <div id="texts" style="display:inline; white-space:nowrap; padding-right: 50px; padding-top: 70px; color:#31302a;">
+                    @ViewBag.global_message
+                </div>
+            </div>
+        </div>
+    </header>
+    <br /><br /><br />
+    <div class="container">
+        <div class="row" style="padding-right:120px; height: 60px; background-color: #31302a;">
+            <div class="col" style="padding-top: 20px; color: #fff;">
+                פרסום פוסט חדש
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row" style="padding-right:120px; background: -webkit-linear-gradient(#f5f5ff, white); border: 1px solid;">
+            <div class="col" style="padding-top: 50px; padding-bottom: 50px;">
+                <form action="newpost" method="post">
+                    כותרת: <input id="Text1" name="Subject" type="text" />
+                    <br /><br />
+                    
+                    @using (Html.BeginForm("Index", "Home", FormMethod.Post))
+                    {
+                        @Html.LabelFor(m => m.Text)<br />
+                        @Html.TextAreaFor(m => m.Text)
+                        @Html.ValidationMessageFor(m => m.Text, "", new { @class = "error" })
+                        <br /><br />
+                        
+                        <input id="Submit1" type="submit" value="פרסם" />
+                        <br />
+                        
+                    }
+                    @Scripts.Render("~/bundles/jquery")
+                    <script type="text/javascript" src="//tinymce.cachefly.net/4.0/tinymce.min.js"></script>
+                    <script type="text/javascript">
+                        tinymce.init({ selector: 'textarea', width: 500 });
+                    </script>
+                   
+
+                    @ViewBag.Message
+                    <div class="colortxt">
+                        @Html.ValidationSummary()
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <br /><br /><br /><br /><br />
+    
+    
+    
+    
+    <!-- Footer -->
+    <footer class="text-center">
+        <div class="footer-above">
+            <div class="container">
+                <div class="row">
+
+                    <div class="footer-col col-md-4">
+                        פרויקט במבוא לתקשורת מחשבים
+                        <br />
+                        מור כהן - 203420005
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </footer>
+</body>
+
+</html>

@@ -1,0 +1,334 @@
+﻿
+@model mvc_project1.Models.subjects
+@using mvc_project1.Models;
+
+@{
+
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+    
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+    <link href="@Url.Content("~/Content/vendor/bootstrap/css/bootstrap.min.css")" rel="stylesheet"/>
+    <link href="@Url.Content("~/Content/bootstrap.min.css")" rel="stylesheet" type="text/css" />
+    <!-- fonts -->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Assistant:600&amp;subset=hebrew" rel="stylesheet">    
+    <title>הנדסת תוכנה שנה ג</title>
+
+    <script type="text/javascript">
+        function show_hide_row(row)
+        {
+            $("#"+row).toggle();
+        }
+    </script>
+
+</head>
+
+<body id="page-top" dir="rtl">
+
+    <!-- Navigation -->
+
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+
+        <div class="container">
+
+            <a class="navbar-brand js-scroll-trigger" href='@Url.Action("showHome", "Home")' style="float:right"><img src="/Content/logo.png" class="logo" alt="logo"></a>
+            <div style="float:left">
+
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            @{
+                                string val = Request.Cookies["Cookie1"]?.Value;
+                                string val2 = Request.Cookies["Cookie2"]?.Value;
+
+                                if (val != null && val2 != null && val.Equals(ViewBag.MyCookie1) && val2.Equals(ViewBag.MyCookie2))
+                                {
+                                    <text>
+                                        ברוך הבא, @ViewBag.MyCookie1 |
+                                    </text>
+
+                                    string val4 = Request.Cookies["Cookie3"]?.Value;
+
+                                    if (val4 != null && val4.Equals("1"))
+                                    {
+                                        <a style="color:#add82b;" href='@Url.Action("paneladmin", "AdminPanel")'>פאנל ניהול</a>
+                                        <text>|</text>
+                                    }
+
+
+
+                                    @Html.ActionLink("התנתק", "RemoveCookie", "Home")
+                                }
+                                else
+                                {
+                                    <text>
+                                        ברוך הבא אורח,
+                                    </text>
+                                    @Html.ActionLink("התחברות", "Loginuser", "Login") <text>|</text> @Html.ActionLink("הרשמה", "Enter", "user")
+                                }
+                            }
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+
+    <header class="masthead">
+        <div id="container" style="white-space:nowrap">
+            <div class="row">
+                <div id="image" style="display:inline; padding-right: 650px; padding-top: 35px;">
+                    <img src="/Content/global2.png" />
+                </div>
+                <div id="texts" style="display:inline; white-space:nowrap; padding-right: 50px; padding-top: 70px; color:#31302a;">
+                    @ViewBag.global_message
+                </div>
+            </div>
+        </div>
+    </header>
+
+
+
+    <div class="container">
+
+
+        @{
+            string val3 = Request.Cookies["Cookie3"]?.Value;
+
+            if (val != null && val2 != null && val3 != null && val.Equals(ViewBag.MyCookie1) && val2.Equals(ViewBag.MyCookie2))
+            {
+                <a href='@Url.Action("showPage", "openpost")'>
+                    <img src='@Url.Content("/Content/newpost.png")' />
+                </a>
+                <a href='https://drive.google.com/drive/folders/0B-lpIKJeKLS4bEpqYTRQaUhONkU' style="padding-right:850px; padding-bottom:10px; color:#3b6dcc;"><img src="/Content/gd.png" alt="google drive"> תקיית הדרייב</a>
+            }
+            else
+            {
+                <text>
+                    התחבר על מנת לפרסם פוסט
+                </text>
+            }
+        }
+
+        @if (TempData["notice2"] != null)
+        {
+            <p>@TempData["notice2"]</p>
+        }
+
+        <table class="table table-hover">
+            <thead style="height: 60px; background-color: #31302a; color: #fff; " id="table_detail">
+                <tr>
+
+                    <th style="text-align: right;">כותרת</th>
+                    <th style="text-align: right;">כינוי</th>
+                    <th style="text-align: right;">תאריך</th>
+
+                    @{
+                        string val6 = Request.Cookies["Cookie3"]?.Value;
+                        if (val6 != null && (val6.Equals("1") || val6.Equals("2")))
+                        {
+                            <th style="text-align: right;"></th>
+                        }
+                    }
+
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (subject obj in Model.list_subs)
+                {
+                    IHtmlString htmlString = Html.Raw(obj.Text);
+
+                    <tr onclick="show_hide_row(@obj.id);">
+                        <td>
+
+                            <div class="popover__wrapper">
+                                <div class="popover__title"><a href="#/" style="color: #31302a;">@obj.Subject</a></div>
+                                <div class="push popover__content">
+                                    <div class="popover__message">@htmlString</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            @if (obj.Nickname.Equals("Admin"))
+                            {
+                                <span style="color:#ff0000;">@obj.Nickname</span>
+                            }
+                            @if (obj.Nickname.Equals("manager1") || obj.Nickname.Equals("manager2"))
+                            {
+                                <span style="color:#8cba00;">@obj.Nickname</span>
+                            }
+                            @if (!obj.Nickname.Equals("Admin") && !obj.Nickname.Equals("manager1") && !obj.Nickname.Equals("manager2"))
+                            {
+                                @obj.Nickname
+                            }
+                        </td>
+                        <td>
+                            @obj.Time
+                        </td>
+
+                        @{
+                            string val5 = Request.Cookies["Cookie3"]?.Value;
+                            if (val5 != null && (val5.Equals("1") || val5.Equals("2")))
+                            {
+                                <td>
+                                    @Html.ActionLink("מחיקה", "Removeee", "Home", new { id = obj.id }, null)
+                                </td>
+                            }
+                        }
+                    </tr>
+
+                        <tr id=@obj.id class="hidden_row" style="display:none; background-color:#f3fbff;">
+                            <td colspan=4 style="padding-right: 50px;">
+                                @htmlString
+                                <br /><br />
+                                תגובות:
+                                @foreach (CommentsModel obj1 in Model.list_coms)
+                                {
+                                    if (obj1.id == obj.id)
+                                    {
+                                        <div class="row" style="padding-right:100px">
+                                            <div class="col-12 col-md-auto">
+                                                @obj1.Nickname1
+                                                :
+                                            </div>
+                                            <div style="padding-right:30px;">
+                                                <div class="col col-md-auto bubble" style="width:600px; height:100px; background: -webkit-linear-gradient(top, #ffffff 0%, rgba(247, 247, 247, 0.50) 100%); box-shadow: 3px 3px 13px #e6e6e6; border-radius: 15px;">
+                                                    
+                                                    <div style="padding-top:15px;">@obj1.Comment1</div>
+                                                    @if (val5 != null && (val5.Equals("1") || val5.Equals("2")))
+                                                    {
+                                                        <div style="padding-right:590px; padding-top:40px;">@Html.ActionLink("x", "Removecomment", "Home", new { id = obj1.k }, null)</div>
+                                                    }
+                                                    
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                            <br />
+
+                                    }
+
+                                }
+                                @if (val != null && val2 != null && val3 != null && val.Equals(ViewBag.MyCookie1) && val2.Equals(ViewBag.MyCookie2))
+                                {
+                                <a href='#id' onclick="show_hide_row(@(-obj.id));" style="padding-right:950px; color:#31302a">הגב</a>
+
+                                <form id=@(-obj.id) action="CommentToPost" method="post" class="hidden_row" style="display:none;">
+                                    תגובה:
+                                    <br />
+                                    <input id="Text1" name="id" type="hidden" value=@obj.id />
+                                    <textarea id="Text1" name="Comment1" rows="5" cols="100"></textarea>
+                                    <br />
+                                    <input id="Submit1" type="submit" value="שלח" />
+
+                                </form>
+                                }
+                                else
+                                {
+                                    <span style="padding-right:900px">
+                                        <text>התחבר על מנת להגיב</text>
+                                    </span>
+                                }
+                                </td>
+                                </tr>
+                            }
+
+                </tbody>
+                </table>
+
+                </div>
+
+
+                <br /><br />
+
+
+                <div class="container">
+                    <table class="table" style="border: 1px solid;">
+                        <thead style="height: 60px; background-color: #31302a; color: #fff; ">
+                            <tr>
+
+                                <th style="text-align: right;">סימון משתמשים</th>
+                                <th style="text-align: right;"></th>
+                                <th style="text-align: right;"></th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span style="color:red; padding-right: 100px;">אדמין - בעלים</span></td>
+                                <td><span style="color:#8cba00; padding-right: 100px;">מנהל פורום</span></td>
+                                <td><span style="padding-right: 100px;">משתמש רגיל</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+
+                <br /><br />
+
+                <!-- Footer -->
+                <footer class="text-center">
+                    <div class="footer-above">
+                        <div class="container">
+                            <div class="row">
+
+                                <div class="footer-col col-md-4">
+                                    <a href='http://morc.co.il/' style="padding-right:25px;"><img src="/Content/portfolio.png" alt="logo"></a>
+                                    <br />
+                                    פרויקט במבוא לתקשורת מחשבים
+                                    <br />
+                                    מור כהן - 203420005
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </footer>
+                <!-- Bootstrap core JavaScript -->
+                <script src="vendor/jquery/jquery.min.js"></script>
+                <script src="vendor/popper/popper.min.js"></script>
+                <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+                <!-- Plugin JavaScript -->
+                <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+                <!-- Contact Form JavaScript -->
+                <script src="js/jqBootstrapValidation.js"></script>
+                <script src="js/contact_me.js"></script>
+                <!-- Custom scripts -->
+                <script src="js/freelancer.min.js"></script>
+
+                <!-- WhatsHelp.io widget -->
+                <script type="text/javascript">
+                    (function () {
+                        var options = {
+                            facebook: "883846051674257", // Facebook page ID
+                            company_logo_url: "https://scontent.ftlv1-2.fna.fbcdn.net/v/t1.0-9/13903382_1189631811058178_6984404414623256609_n.jpg?oh=5f42828a4933d27d2046bcd2f4d2a9f9&oe=5AB01945", // URL of company logo (png, jpg, gif)
+                            greeting_message: "היי, אשמח לעזור בכיף בכל נושא =]", // Text of greeting message
+                            call_to_action: "שלחו לי הודעה", // Call to action
+                            position: "left", // Position may be 'right' or 'left'
+                        };
+                        var proto = document.location.protocol, host = "whatshelp.io", url = proto + "//static." + host;
+                        var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = url + '/widget-send-button/js/init.js';
+                        s.onload = function () { WhWidgetSendButton.init(host, proto, options); };
+                        var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x);
+
+                    })();
+                </script>
+
+
+            </body>
+
+</html>

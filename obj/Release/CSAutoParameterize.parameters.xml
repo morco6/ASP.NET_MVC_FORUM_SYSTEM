@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="usersDAL-Web.config Connection String" description="usersDAL Connection String used in web.config by the application to access the database." defaultValue="Data Source=MOR-COHEN;Initial Catalog=USERS;Integrated Security=True" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\morco_000\\documents\\visual\ studio\ 2015\\Projects\\mvc_project1\\mvc_project1\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='usersDAL']/@connectionString" />
+  </parameter>
+  <parameter name="subsDAL-Web.config Connection String" description="subsDAL Connection String used in web.config by the application to access the database." defaultValue="Data Source=MOR-COHEN;Initial Catalog=USERS;Integrated Security=True" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\morco_000\\documents\\visual\ studio\ 2015\\Projects\\mvc_project1\\mvc_project1\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='subsDAL']/@connectionString" />
+  </parameter>
+  <parameter name="gblmDAL-Web.config Connection String" description="gblmDAL Connection String used in web.config by the application to access the database." defaultValue="Data Source=MOR-COHEN;Initial Catalog=USERS;Integrated Security=True" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\morco_000\\documents\\visual\ studio\ 2015\\Projects\\mvc_project1\\mvc_project1\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='gblmDAL']/@connectionString" />
+  </parameter>
+  <parameter name="commDAL-Web.config Connection String" description="commDAL Connection String used in web.config by the application to access the database." defaultValue="Data Source=MOR-COHEN;Initial Catalog=USERS;Integrated Security=True" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\morco_000\\documents\\visual\ studio\ 2015\\Projects\\mvc_project1\\mvc_project1\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='commDAL']/@connectionString" />
+  </parameter>
+</parameters>

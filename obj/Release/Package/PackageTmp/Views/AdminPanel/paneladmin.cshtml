@@ -1,0 +1,327 @@
+﻿@model mvc_project1.Models.usersdb
+@using mvc_project1.Models;
+
+@{
+    string Nickname = Request.Cookies["Cookie1"]?.Value;
+    string val2 = Request.Cookies["Cookie2"]?.Value;
+    string val3 = Request.Cookies["Cookie3"]?.Value;
+
+    if (Nickname != null && val2 != null && val3 != null && Nickname.Equals("Admin") && val2.Equals(ViewBag.MyCookie2) && val3.Equals("1")) { }
+    else
+    {//if not admin -> redirect
+        Response.Redirect("redirect");
+    }
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+    <link href="@Url.Content("~/Content/vendor/bootstrap/css/bootstrap.min.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/bootstrap.min.css")" rel="stylesheet" type="text/css" />
+    <!-- fonts -->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Assistant:600&amp;subset=hebrew" rel="stylesheet">
+
+    <title>פאנל ניהול - אדמין</title>
+</head>
+
+<body id="page-top" dir="rtl">
+
+    <!-- Navigation -->
+
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+
+        <div class="container">
+
+            <a class="navbar-brand js-scroll-trigger" href='@Url.Action("showHome", "Home")' style="float:right"><img src="/Content/logo.png" class="logo" alt="logo"></a>
+            <div style="float:left">
+
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            ברוך הבא, @ViewBag.MyCookie1 |
+                            @{
+                                if (Nickname != null && val2 != null && val3 != null && Nickname.Equals(ViewBag.MyCookie1) && val2.Equals(ViewBag.MyCookie2) && val3.Equals("1")) { }
+
+                                {
+                                    <a style="color:#add82b;" href='@Url.Action("paneladmin", "AdminPanel")'>פאנל ניהול</a>
+                                }
+                            }
+                            <text>|</text>
+                            @Html.ActionLink("התנתק", "RemoveCookie", "Home")
+
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+
+    <header class="masthead">
+        <div id="container" style="white-space:nowrap">
+            <div class="row">
+                <div id="image" style="display:inline; padding-right: 650px; padding-top: 35px;">
+                    <img src="/Content/global2.png" />
+                </div>
+                <div id="texts" style="display:inline; white-space:nowrap; padding-right: 50px; padding-top: 70px; color:#31302a;">
+                    @ViewBag.global_message
+                </div>
+            </div>
+        </div>
+    </header>
+    <br /><br /><br />
+    <div class="container">
+        <div class="row" style="padding-right:120px; height: 60px; background-color: #31302a;">
+            <div class="col" style="padding-top: 20px; color: #fff;">
+                פאנל ניהול - אדמין
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row" style="padding-right:120px; background: -webkit-linear-gradient(#f5f5ff, white); border: 1px solid;">
+            <div class="col" style="padding-top: 50px; padding-bottom: 50px;">
+                <form action="globalMessage" method="post">
+                    הודעה גלובלית: <input id="Text1" name="Message" type="text" />
+
+                    <input id="Submit1" type="submit" value="פרסם" />
+                    @if (TempData["notice"] != null)
+                    {
+                        <p>@TempData["notice"]</p>
+                    }
+                </form>
+            </div>
+        </div>
+
+
+        <br />
+        <h4 style="display:inline-block;">
+            משתמשים
+
+            
+            <span><a id="myBtn" style="color:#31302a;" href="#" >הוסף משתמש חדש</a></span>
+            
+        </h4>
+
+
+
+        <!-- The Modal -->
+        <div id="myModal" class="modal">
+
+            <!-- Modal content -->
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <br />
+                <p>טופס להוספת משתמש חדש</p>
+                <br />
+                <form action="Submit" method="post">
+                    שם משתמש: <input id="Text1" name="NickName" type="text" />
+                    <br /><br />
+                    סיסמא: <input id="Text1" name="Password" type="password" aria-describedby="passwordHelpInline" pattern=".{8,20}" required title="8-20 תווים" />
+                    <small id="passwordHelpInline" class="text-muted">
+                        סיסמא חייבת להכיל 8-20 תווים
+                    </small>
+
+                    <br /><br />
+                    אימייל: <input id="Text1" name="Email" type="text" />
+                    <br /><br />
+                    שם פרטי: <input id="Text1" name="PrivateName" type="text" />
+                    <br /><br />
+                    גיל: <input id="Text1" name="Age" type="text" />
+                    <br /><br />
+                    הרשאה:
+                    <select name="Permission" class="custom-select" size="3" style="height:80px; width:200px;">
+                        <option value="1">אדמין</option>
+                        <option value="2">מנהל</option>
+                        <option value="0">רגיל</option>
+                    </select>
+                    <br /><br /><br />
+                    <input id="Submit1" type="submit" value="לחץ לרישום" />
+                    
+                    <div class="colortxt">
+                        @Html.ValidationSummary()
+                    </div>
+                </form>
+
+            </div>
+
+        </div>
+
+        <script>
+// Get the modal
+var modal = document.getElementById('myModal');
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal
+btn.onclick = function() {
+    modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+        </script>
+
+        @if (TempData["notice1"] != null)
+        {
+            <p>@TempData["notice1"]</p>
+        }
+        @if (TempData["notice2"] != null)
+        {
+            <p>@TempData["notice2"]</p>
+        }
+
+
+        <table class="table table-hover">
+            <thead style="height: 60px; background-color: #31302a; color: #fff; ">
+                <tr>
+
+                    <th style="text-align: right;">מס' משתמש</th>
+                    <th style="text-align: right;">כינוי</th>
+                    <th style="text-align: right;">סיסמא</th>
+                    <th style="text-align: right;">אימייל</th>
+                    <th style="text-align: right;">שם</th>
+                    <th style="text-align: right;">גיל</th>
+                    <th style="text-align: right;">הרשאה</th>
+                    <th style="text-align: right;"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (User obj in Model.users)
+                {
+                    <tr>
+                        <td>
+                            @obj.id
+                        </td>
+                        <td>
+                            @obj.NickName
+                        </td>
+                        <td>
+                            @obj.Password
+                        </td>
+                        <td>
+                            @obj.Email
+                        </td>
+                        <td>
+                            @obj.PrivateName
+                        </td>
+                        <td>
+                            @obj.Age
+                        </td>
+                        <td>
+                            @obj.Permission
+                        </td>
+                        <td>
+                            <form action="Removee" method="post">
+                                <input id="Text1" name="id" type="hidden" value=@obj.id />
+                                <input id="Submit1" type="submit" value="מחיקה" />
+                            </form>
+                        </td>
+                    </tr>
+
+                                }
+
+            </tbody>
+        </table>
+
+</div>
+    <br /><br />
+    
+    
+    
+    <div class="container">
+
+        <h4 style="display:inline-block;">
+            תצוגת מנהלים אסינכרונית
+        </h4>
+
+        <table id="async1" class="table table-hover">
+            <thead style="height: 60px; background-color: #31302a; color: #fff; ">
+                <tr>
+
+                    <th style="text-align: right;">מס' משתמש</th>
+                    <th style="text-align: right;">כינוי</th>
+                    <th style="text-align: right;">סיסמא</th>
+                    <th style="text-align: right;">אימייל</th>
+                    <th style="text-align: right;">שם</th>
+                    <th style="text-align: right;">גיל</th>
+                    <th style="text-align: right;">הרשאה</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+        <script language="javascript">
+
+
+            $.get("asyncGetManagersJason", null, BindData);
+
+            function BindData(users1)
+            {
+                var id1;
+                var tbl = $("#async1");
+                for (i=0;i<users1.length;i++)
+                {
+                    if (users1[i].Permission == "2") {
+                        var newRow = "<tr>" +
+                            "<td>" + users1[i].id + "</td>" +
+                            "<td>" + users1[i].NickName + "</td>" +
+                            "<td>" + users1[i].Password + "</td>" +
+                            "<td>" + users1[i].Email + "</td>" +
+                            "<td>" + users1[i].PrivateName + "</td>" +
+                            "<td>" + users1[i].Age + "</td>" +
+                            "<td>" + users1[i].Permission + "</td>" +
+                            "</tr>"
+                        tbl.append(newRow);
+                    }
+                }
+            }
+
+
+        </script>
+
+        
+
+
+
+
+        <br /><br /><br />
+        <!-- Footer -->
+        <footer class="text-center">
+            <div class="footer-above">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="footer-col col-md-4">
+                            פרויקט במבוא לתקשורת מחשבים
+                            <br />
+                            מור כהן - 203420005
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </footer>
+</body>
+</html>
